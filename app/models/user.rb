@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :email,
   presence: true,
   uniqueness: true,
-  inclusion: { in: %w(@)
+  inclusion: { in: %w(@) }
 
   validates :password,
   presence: true,
