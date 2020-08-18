@@ -1,8 +1,5 @@
 require 'rails_helper'
 
-# bundle exec rspec spec/models/user_spec.rb
-# @user.errors.full_messages
-
 RSpec.describe @User, type: :model do
   describe '#create' do
     before do
