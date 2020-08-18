@@ -11,19 +11,19 @@ class User < ApplicationRecord
     validates :email,
       uniqueness: true
 
-    validates :password
+    validates :password,
+      format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i },
+      length: { minimum: 6 }
+    
+    with_options format: { with: /\A[ぁ-んァ-ン一-龥]/ } do
+      validates :first_name
+      validates :last_name
+    end
 
-    validates :first_name,
-      format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-
-    validates :last_name,
-      format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-
-    validates :first_name_kana,
-      format: { with: /\A[ァ-ヶー－]+\z/ }
-
-    validates :last_name_kana,
-      format: { with: /\A[ァ-ヶー－]+\z/ }
+    with_options format: { with: /\A[ァ-ヶー－]+\z/ } do
+      validates :first_name_kana
+      validates :last_name_kana
+    end
 
     validates :birth_date
     end
