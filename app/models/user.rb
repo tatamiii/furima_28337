@@ -5,37 +5,28 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   with_options presence: true do
 
-    # validates :nickname,
-    #           presence: true
+    validates :nickname
 
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
     validates :email,
-              # presence: true,
-              uniqueness: true
-    # format: { with: VALID_EMAIL_REGEX }
+      uniqueness: true
 
     validates :password,
-              # presence: true,
-              format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i },
-              length: { minimum: 6 }
+      format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i },
+      length: { minimum: 6 }
 
     validates :first_name,
-              # presence: true,
-              format: { with: /\A[ぁ-んァ-ン一-龥]/ }
+      format: { with: /\A[ぁ-んァ-ン一-龥]/ }
 
     validates :last_name,
-              # presence: true,
-              format: { with: /\A[ぁ-んァ-ン一-龥]/ }
+      format: { with: /\A[ぁ-んァ-ン一-龥]/ }
 
     validates :first_name_kana,
-              # presence: true,
-              format: { with: /\A[ァ-ヶー－]+\z/ }
+      format: { with: /\A[ァ-ヶー－]+\z/ }
 
     validates :last_name_kana,
-              # presence: true,
-              format: { with: /\A[ァ-ヶー－]+\z/ }
+      format: { with: /\A[ァ-ヶー－]+\z/ }
 
-    # validates :birth_date,
-    #           presence: true
+    validates :birth_date
     end
 end
