@@ -1,6 +1,6 @@
 class Shop < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to_active_hash :genre
+  belongs_to_active_hash :category,:condition,:delivery_time,:fee,:sending_area
 
   #空の投稿を保存できないようにする
   validates :title, :text, :genre, presence: true
