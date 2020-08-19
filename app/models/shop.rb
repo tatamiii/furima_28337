@@ -4,7 +4,7 @@ class Shop < ApplicationRecord
 
   with_options presence: true do
 
-    validates :item_image
+    # validates :item_image
     validates :item_name
     validates :item_info
 
