@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   get 'articles/new'
   devise_for :users
   root "shops#index"
-  resources :shops, only: [:new]
+  resources :shops
 end
