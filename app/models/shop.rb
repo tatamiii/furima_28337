@@ -1,6 +1,7 @@
 class Shop < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to_active_hash :category,:condition,:delivery_time,:fee_id,:sending_area
+  belongs_to_active_hash :category,:condition,:delivery_time,:fee,:sending_area
+  has_one_attached :item_image
 
   with_options presence: true do
 
