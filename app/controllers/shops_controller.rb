@@ -1,4 +1,6 @@
 class ShopsController < ApplicationController
+  before_action :move_to_index, except: [:index]
+
   def index
   end
 
@@ -20,5 +22,10 @@ class ShopsController < ApplicationController
     params.permit(:item_image,:item_name,:item_info,:category_id,:condition_id,:fee_id,:sending_area_id,:delivery_time_id,:item_price)
   end
 
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
+  end
 
 end
