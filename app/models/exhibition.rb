@@ -1,4 +1,4 @@
-class Shop < ApplicationRecord
+class Exhibition < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
   belongs_to_active_hash :condition
@@ -9,7 +9,6 @@ class Shop < ApplicationRecord
 
   with_options presence: true do
 
-    # validates :item_image
     validates :item_name
     validates :item_info
 
@@ -21,7 +20,7 @@ class Shop < ApplicationRecord
       validates :delivery_time_id
     end
 
-    validates :item_price
+    validates :item_price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
   end
 
 end

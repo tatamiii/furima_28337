@@ -5,11 +5,11 @@ class ShopsController < ApplicationController
   end
 
   def new
-    @item = Shop.new
+    @item = Exhibition.new
   end
 
   def create
-    @item = Shop.new(item_params)
+    @item = Exhibition.new(item_params)
     if @item.save
       redirect_to root_path    
     else
@@ -19,7 +19,7 @@ class ShopsController < ApplicationController
   private
 
   def item_params
-    params.permit(:item_image,:item_name,:item_info,:category_id,:condition_id,:fee_id,:sending_area_id,:delivery_time_id,:item_price)
+    params.permit(:image,:item_name,:item_info,:category_id,:condition_id,:fee_id,:sending_area_id,:delivery_time_id,:item_price).merge(user_id: current_user.id)
   end
 
   def move_to_index
