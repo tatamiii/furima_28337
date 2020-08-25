@@ -1,4 +1,4 @@
-class ShopsController < ApplicationController
+class ExhibitionsController < ApplicationController
   before_action :move_to_index, except: [:index]
 
   def index
@@ -19,7 +19,7 @@ class ShopsController < ApplicationController
   private
 
   def item_params
-    params.permit(:image,:item_name,:item_info,:category_id,:condition_id,:fee_id,:sending_area_id,:delivery_time_id,:item_price).merge(user_id: current_user.id)
+    params.require(:exhibition).permit(:image,:item_name,:item_info,:category_id,:condition_id,:fee_id,:sending_area_id,:delivery_time_id,:item_price).merge(user_id: current_user.id)
   end
 
   def move_to_index

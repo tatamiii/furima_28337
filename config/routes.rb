@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
   devise_for :users
-  root "shops#index"
+  root "exhibitions#index"
+  resources :exhibitions
 end
