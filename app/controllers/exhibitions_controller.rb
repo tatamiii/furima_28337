@@ -35,6 +35,14 @@ class ExhibitionsController < ApplicationController
     @exhibition = Exhibition.find(params[:id])
   end
 
+  def update
+    exhibition = Exhibition.find(params[:id])
+    exhibition.update(item_params)
+    if exhibition.save
+      redirect_to root_path    
+    end
+  end
+
   private
 
   def item_params
