@@ -1,7 +1,8 @@
 class ExhibitionsController < ApplicationController
-  before_action :move_to_index, except: [:index]
+  before_action :move_to_index, except: [:index,:show]
 
   def index
+    @exhibitions = Exhibition.all.order("created_at DESC")
   end
 
   def new
@@ -16,6 +17,32 @@ class ExhibitionsController < ApplicationController
      render :new
     end
   end
+
+  def show
+    @exhibition = Exhibition.find(params[:id])
+    category = Category.all
+  end
+
+  def destroy
+    exhibition = Exhibition.find(params[:id])
+    exhibition.destroy
+    if exhibition.destroy
+      redirect_to root_path
+    end
+  end
+
+  def edit
+    @exhibition = Exhibition.find(params[:id])
+  end
+
+  def update
+    exhibition = Exhibition.find(params[:id])
+    exhibition.update(item_params)
+    if exhibition.save
+      redirect_to root_path    
+    end
+  end
+
   private
 
   def item_params
