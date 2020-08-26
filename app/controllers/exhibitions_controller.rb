@@ -6,7 +6,7 @@ class ExhibitionsController < ApplicationController
   def index
     @exhibitions = Exhibition.all.order("created_at DESC")
   end
-
+ 
   def new
     @exhibition = Exhibition.new
   end
