@@ -1,5 +1,7 @@
 class ExhibitionsController < ApplicationController
   before_action :move_to_index, except: [:index,:show]
+  before_action :set_exhibition, only:[:show,:edit]
+  before_action :move_to_index2, only:[:edit]
 
   def index
     @exhibitions = Exhibition.all.order("created_at DESC")
@@ -19,7 +21,6 @@ class ExhibitionsController < ApplicationController
   end
 
   def show
-    @exhibition = Exhibition.find(params[:id])
     category = Category.all
   end
 
@@ -32,7 +33,6 @@ class ExhibitionsController < ApplicationController
   end
 
   def edit
-    @exhibition = Exhibition.find(params[:id])
   end
 
   def update
@@ -54,5 +54,16 @@ class ExhibitionsController < ApplicationController
       redirect_to action: :index
     end
   end
+
+  def move_to_index2
+    unless user_signed_in? && current_user.id == @exhibition.user_id
+      redirect_to root_path
+    end
+  end
+
+ def set_exhibition
+  @exhibition = Exhibition.find(params[:id])
+ end
+
 
 end
