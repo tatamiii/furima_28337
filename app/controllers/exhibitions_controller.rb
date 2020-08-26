@@ -33,6 +33,10 @@ class ExhibitionsController < ApplicationController
 
   def edit
     @exhibition = Exhibition.find(params[:id])
+    if user_signed_in? && current_user.id == @exhibition.user_id
+    else
+      redirect_to root_path
+    end
   end
 
   def update
