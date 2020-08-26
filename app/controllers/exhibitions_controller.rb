@@ -6,7 +6,7 @@ class ExhibitionsController < ApplicationController
   def index
     @exhibitions = Exhibition.all.order("created_at DESC")
   end
-
+ 
   def new
     @exhibition = Exhibition.new
   end
@@ -29,6 +29,8 @@ class ExhibitionsController < ApplicationController
     exhibition.destroy
     if exhibition.destroy
       redirect_to root_path
+    else
+      redirect_to exhibition_path
     end
   end
 
@@ -39,7 +41,9 @@ class ExhibitionsController < ApplicationController
     exhibition = Exhibition.find(params[:id])
     exhibition.update(item_params)
     if exhibition.save
-      redirect_to root_path    
+      redirect_to root_path
+    else 
+      redilect
     end
   end
 
