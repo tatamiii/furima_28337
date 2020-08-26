@@ -8,13 +8,11 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @exhibition.image if @exhibition.image.attached? %>
-      <%# 商品が売れている場合は、sould outの表示をしましょう。 %>
       <% if @exhibition.purchaser_id.present? %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
       <% end%>   
-      <%# //商品が売れている場合は、sould outの表示をしましょう。 %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -25,18 +23,15 @@
       </span>
     </div>
 
-    <%# ログインしていて、なおかつ、ログインしているユーザと出品しているユーザが同一人物でないとき表示しましょう。 %>
     <% if user_signed_in? && current_user.id == @exhibition.user_id %>
       <%= link_to '商品の編集', edit_exhibition_path, method: :get, class: "item-red-btn" %>
       <p class='or-text'>or</p>
       <%= link_to '削除', exhibition_path, method: :delete, class:'item-destroy' %>
 
-    <%# 商品が売れていない場合はこちらを表示しましょう %>
-      <%# else %>
-        <%#= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
-    <%# //商品が売れていない場合はこちらを表示しましょう %>
+      <% elsif user_signed_in? %>
+        <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+      <% else %>
     <% end %>
-    <%# //ログインしていて、なおかつ、ログインしているユーザと出品しているユーザが同一人物でないとき表示しましょう。 %>
 
     <div class="item-explain-box">
       <span><%= "商品説明" %></span>
