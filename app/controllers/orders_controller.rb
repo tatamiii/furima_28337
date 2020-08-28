@@ -6,7 +6,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(price: order_params[:price])
+    @order = Order.new(
+      price:   order_params[:price],
+      city:    order_params[:city],
+      adress:  order_params[:adress],
+      building:order_params[:building],
+      phone_number: order_params[:phone_number])
     if @order.valid?
       pay_item
       @order.save
@@ -19,7 +24,7 @@ class OrdersController < ApplicationController
   private
  
   def order_params
-    params.permit(:price, :token)
+    params.permit(:price, :city, :adress, :building, :phone_number, :token)
   end
  
   def pay_item
