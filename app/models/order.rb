@@ -2,6 +2,4 @@ class Order < ApplicationRecord
   # belongs_to :user
   # belongs_to :exhibiton
   
-  validates :price, presence: true
-
 end
