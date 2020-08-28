@@ -8,7 +8,7 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @exhibition.image if @exhibition.image.attached? %>
-      <% if @exhibition.purchaser_id.present? %>
+      <% if @order.present? %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>

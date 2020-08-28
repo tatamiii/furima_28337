@@ -13,13 +13,12 @@ class OrdersController < ApplicationController
       city:order_params[:city],
       adress:order_params[:adress],
       phone_number:order_params[:phone_number],
-      user_id:order_params[:user_id])
+      user_id:order_params[:user_id],
+      exhibition_id:params[:id])
 
-    # @exhibition = Exhibition.find(params[:id])
     if @order.valid?
       pay_item
       @order.save
-      # @exhibiton.update(purchaser_id: params[:user_id])
       return redirect_to root_path
     else
       render 'index'
