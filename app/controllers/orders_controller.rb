@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(
       price:order_params[:price],
+      prefecture:order_params[:prefecture],
       city:order_params[:city],
       adress:order_params[:adress],
       phone_number:order_params[:phone_number],
@@ -30,7 +31,7 @@ class OrdersController < ApplicationController
   private
  
   def order_params
-    params.permit(:price, :city, :adress, :building, :phone_number).merge(user_id: current_user.id)
+    params.permit(:price, :prefecture, :city, :adress, :building, :phone_number).merge(user_id: current_user.id)
   end
 
   def pay_params
