@@ -7,9 +7,11 @@ class OrdersController < ApplicationController
 
   def index
     @exhibition = Exhibition.find(params[:id])
+    @order = Order.new
   end
 
   def create
+    @exhibition = Exhibition.find(params[:id])
     @order = Order.new(
       price:order_params[:price],
       postal_code:order_params[:postal_code],
