@@ -31,7 +31,7 @@
     </div>
     <%# /支払額の表示 %>
 
-<%= form_with  model: @order, url: orders_path(id: @exhibition), id: 'charge-form', class: 'card-form',local: true do |f| %>
+<%= form_with  url: orders_path(id: @exhibition), id: 'charge-form', class: 'card-form',local: true do |f| %>
     <%# binding.pry %>
      <%#= render 'shared/error_messages', model: f.object %>
      <%= f.hidden_field :price, :value => @exhibition.item_price %>
