@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(
       price:order_params[:price],
+      postal_code:order_params[:postal_code],
       prefecture:order_params[:prefecture],
       city:order_params[:city],
       adress:order_params[:adress],
@@ -24,14 +25,14 @@ class OrdersController < ApplicationController
       @order.save
       return redirect_to root_path
     else
-      render 'index'
+      render :index
     end
   end
  
   private
  
   def order_params
-    params.permit(:price, :prefecture, :city, :adress, :building, :phone_number).merge(user_id: current_user.id)
+    params.permit(:price, :postal_code, :prefecture, :city, :adress, :building, :phone_number).merge(user_id: current_user.id)
   end
 
   def pay_params
