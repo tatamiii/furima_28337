@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :exhibition do
-    id {1}
     item_name {"bbb"}
     item_info {"ccc"}
     category_id {rand(2..10)}
