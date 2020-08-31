@@ -1,5 +1,4 @@
 class Order < ApplicationRecord
   # belongs_to :user
-  # belongs_to :exhibiton
-  
+  belongs_to :exhibition
 end

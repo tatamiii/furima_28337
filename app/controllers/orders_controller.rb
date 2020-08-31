@@ -1,13 +1,15 @@
 class OrdersController < ApplicationController
   # before_action :set_exhibition, only:[:index]
+  before_action :move_to_session, only:[:index]
+  before_action :move_to_index, only:[:index]
+  before_action :move_to_index2, only:[:index]
+
 
   def index
     @exhibition = Exhibition.find(params[:id])
   end
 
   def create
-    # @order = Order.new(order_params)
-
     @order = Order.new(
       price:order_params[:price],
       city:order_params[:city],
@@ -44,5 +46,24 @@ class OrdersController < ApplicationController
     )
   end
  
+  def move_to_session
+    unless user_signed_in?
+      redirect_to user_session_path
+    end
+  end
+
+  def move_to_index
+    @exhibition = Exhibition.find(params[:id])
+    if current_user.id == @exhibition.user_id
+      redirect_to root_path
+    end
+  end
+
+  def move_to_index2
+    @exhibition = Exhibition.find(params[:id])
+    if @exhibition.order.present?
+      redirect_to root_path
+    end
+  end
 
 end
