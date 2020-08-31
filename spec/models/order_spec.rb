@@ -1,12 +1,58 @@
-RSpec.describe '簡単なテストコード' do
-  describe '数字の計算' do
-    it "1 + 1は2である" do
-      expect(1 + 1).to eq 2
-    end
+require 'rails_helper'
+RSpec.describe Order, type: :model do
+  before do
+    @buyer = FactoryBot.create(:user)
+    @seller = FactoryBot.create(:user)
+    @exhibition = FactoryBot.build(:exhibition, user_id: @seller.id)
+    @exhibition.image = fixture_file_upload('public/images/test_img.png')
+    @exhibition.save
+
+    @order = FactoryBot.build(:order)
+    @order.user_id = @buyer.id
+    @order.exhibition_id = @exhibition.id
+
   end
-  describe '文字列の結合' do
-    it "「カレー」と「ライス」をつなげるとカレーライスになること" do
-      expect("カレー" + "ライス").to eq "カレーライス"
+
+  describe '購入' do
+    context '購入がうまくいくとき' do
+      it "要素が全て入力されているとき登録できる" do
+        expect(@order).to be_valid
+      end
     end
+
+    context '購入がうまくいかないとき' do
+      it '郵便番号が必須であること' do
+        @order.postal_code = ""
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Postal code can't be blank", "Postal code is invalid")
+      end
+
+      it '都道府県が---でないこと' do
+        @order.prefecture = "1"
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Prefecture must be other than 1")
+      end
+
+      it '市町村が入力されていること' do
+        @order.city = ""
+        @order.valid?
+        expect(@order.errors.full_messages).to include("City can't be blank")
+      end
+
+      it '住所が入力されていること' do
+        @order.adress = ""
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Adress can't be blank")
+      end
+
+      it '電話番号が入力されていること' do
+        @order.phone_number = ""
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number can't be blank")
+      end
+
+    end
+
   end
+
 end
