@@ -39,12 +39,12 @@ class ExhibitionsController < ApplicationController
   end
 
   def update
-    exhibition = Exhibition.find(params[:id])
-    exhibition.update(item_params)
-    if exhibition.save
+    @exhibition = Exhibition.find(params[:id])
+    @exhibition.update(item_params)
+    if @exhibition.save
       redirect_to root_path
     else 
-      redilect
+      render :edit
     end
   end
 
