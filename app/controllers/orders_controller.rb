@@ -7,20 +7,12 @@ class OrdersController < ApplicationController
 
   def index
     @exhibition = Exhibition.find(params[:id])
-    @order = Order.new
+    @order = Purchase.new
   end
 
   def create
     @exhibition = Exhibition.find(params[:id])
-    @order = Order.new(
-      price:order_params[:price],
-      postal_code:order_params[:postal_code],
-      prefecture:order_params[:prefecture],
-      city:order_params[:city],
-      adress:order_params[:adress],
-      phone_number:order_params[:phone_number],
-      user_id:order_params[:user_id],
-      exhibition_id:params[:id])
+    @order = Purchase.new(order_params)
 
     if @order.valid?
       pay_item
@@ -34,18 +26,14 @@ class OrdersController < ApplicationController
   private
  
   def order_params
-    params.permit(:price, :postal_code, :prefecture, :city, :adress, :building, :phone_number).merge(user_id: current_user.id)
-  end
-
-  def pay_params
-    params.permit(:price, :token)
+    params.require(:purchase).permit(:price, :postal_code, :prefecture, :city, :adress, :building, :phone_number, :token, :id).merge(user_id: current_user.id)
   end
  
   def pay_item
-    Payjp.api_key = "sk_test_f159bc70f717fb6bd05b0dda"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: pay_params[:price],
-      card: pay_params[:token],
+      amount: order_params[:price],
+      card: order_params[:token],
       currency:'jpy'
     )
   end

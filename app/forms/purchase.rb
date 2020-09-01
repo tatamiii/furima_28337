@@ -1,24 +1,29 @@
-# class Purchase
+class Purchase
 
-#   include ActiveModel::Model
-#   attr_accessor :postal_code, :prefecture, :city, :adress, :building, :phone_number
+  include ActiveModel::Model
+  attr_accessor :price, :postal_code, :prefecture, :city, :adress, :building, :phone_number, :token, :id, :user_id
 
-#   with_options presence: true do
-#     # validates :number
-#     # validates :exp_month
-#     # validates :exp_year
-#     # validates :cvc
-#     validates :postal_code
-#     validates :prefecture
-#     validates :city
-#     validates :adress
-#     validates :building
-#     validates :phone_number
-#   end
+  with_options presence: true do
+    validates :token
+    validates :postal_code,format: {with: /\A\d{3}[-]\d{4}\z/}
+    validates :prefecture,numericality: { other_than: 1 }
+    validates :city
+    validates :adress
+    validates :phone_number,format: {with: /\A\d{11}\z/}
+  end
 
 
-#   def save
-#     Orders.create(postal_code: postal_code, prefecture: prefecture, city: city, house_number: house_number, building_name: building_name,user_id: current_user.id)
-#   end
+  def save
+    Order.create(
+      price: price,
+      postal_code: postal_code,
+      prefecture: prefecture,
+      city: city,
+      adress: adress,
+      building: building,
+      phone_number: phone_number,
+      user_id: user_id,
+      exhibition_id:id)
+  end
   
-# end
+end
