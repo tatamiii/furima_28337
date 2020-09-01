@@ -1,7 +1,7 @@
 class Purchase
 
   include ActiveModel::Model
-  attr_accessor :price, :postal_code, :prefecture, :city, :adress, :building, :phone_number, :token, :id, :user_id
+  attr_accessor :number,:exp_month,:exp_year,:cvc,:price, :postal_code, :prefecture, :city, :adress, :building, :phone_number, :token, :id, :user_id, :exhibition_id
 
   with_options presence: true do
     validates :token
