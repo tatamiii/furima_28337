@@ -14,18 +14,18 @@ RSpec.describe Order, type: :model do
   end
 
   describe '購入' do
-    context '購入がうまくいくとき' do
-      it "要素が全て入力されているとき登録できる" do
-        expect(@order).to be_valid
-      end
-    end
+    # context '購入がうまくいくとき' do
+    #   it "要素が全て入力されているとき登録できる" do
+    #     expect(@order).to be_valid
+    #   end
+    # end
 
-    context '購入がうまくいかないとき' do
-      it '郵便番号が空でであること' do
-        @order.postal_code = ""
-        @order.valid?
-        expect(@order.errors.full_messages).to include("Postal code can't be blank", "Postal code is invalid")
-      end
+    # context '購入がうまくいかないとき' do
+    #   it '郵便番号が空でであること' do
+    #     @order.postal_code = ""
+    #     @order.valid?
+    #     expect(@order.errors.full_messages).to include("Postal code can't be blank", "Postal code is invalid")
+    #   end
 
       # it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
       #   @order.postal_code = '1234567'
@@ -50,13 +50,13 @@ RSpec.describe Order, type: :model do
       #   expect(@order.errors.full_messages).to include("Adress can't be blank")
       # end
 
-      # it '電話番号が入力されていること' do
-      #   @order.phone_number = ""
-      #   @order.valid?
-      #   expect(@order.errors.full_messages).to include("Phone number can't be blank")
-      # end
+    #   # it '電話番号が入力されていること' do
+    #   #   @order.phone_number = ""
+    #   #   @order.valid?
+    #   #   expect(@order.errors.full_messages).to include("Phone number can't be blank")
+    #   # end
 
-    end
+    # end
 
   end
 

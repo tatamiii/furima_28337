@@ -40,7 +40,7 @@ RSpec.describe Order, type: :model do
       end
 
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと購入できないこと' do
-        @order.postal_code = '1234567'
+        @order.postal_code = "1234567"
         @order.valid?
         expect(@order.errors.full_messages).to include("Postal code is invalid")
       end

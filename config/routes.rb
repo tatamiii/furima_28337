@@ -4,6 +4,5 @@ Rails.application.routes.draw do
   root "exhibitions#index"
   resources :exhibitions
 
-  # root to: 'orders#index'
   resources :orders
 end
