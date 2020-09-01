@@ -2,6 +2,7 @@ class ExhibitionsController < ApplicationController
   before_action :move_to_index, except: [:index,:show]
   before_action :set_exhibition, only:[:show,:edit]
   before_action :move_to_index2, only:[:edit]
+  before_action :order, only:[:show]
 
   def index
     @exhibitions = Exhibition.all.order("created_at DESC")
@@ -65,9 +66,12 @@ class ExhibitionsController < ApplicationController
     end
   end
 
- def set_exhibition
+  def set_exhibition
   @exhibition = Exhibition.find(params[:id])
- end
+  end
 
-
+  def order
+    @order = Order.where(exhibition_id: @exhibition.id)
+  end
+  
 end

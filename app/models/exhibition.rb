@@ -7,6 +7,7 @@ class Exhibition < ApplicationRecord
   belongs_to_active_hash :fee
   belongs_to_active_hash :sending_area
   has_one_attached :image
+  has_one :order, dependent: :destroy
 
   with_options presence: true do
 

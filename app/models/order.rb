@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
-  belongs_to :user
-  belongs_to :exhibiton
-  
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :exhibition
+  belongs_to_active_hash :sending_area
+
 end

@@ -1,5 +1,6 @@
 FactoryBot.define do
-  factory :order do
+  factory :purchase do
+    token {"token"}
     exhibition_id {""}
     price       {"500"}
     postal_code  {"254-0047"}
