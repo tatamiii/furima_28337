@@ -1,17 +1,15 @@
 class OrdersController < ApplicationController
-  # before_action :set_exhibition, only:[:index]
   before_action :move_to_session, only:[:index]
   before_action :move_to_index, only:[:index]
   before_action :move_to_index2, only:[:index]
+  before_action :exhibition_find, only:[:index,:create]
 
 
   def index
-    @exhibition = Exhibition.find(params[:id])
     @order = Purchase.new
   end
 
   def create
-    @exhibition = Exhibition.find(params[:id])
     @order = Purchase.new(order_params)
 
     if @order.valid?
@@ -56,6 +54,10 @@ class OrdersController < ApplicationController
     if @exhibition.order.present?
       redirect_to root_path
     end
+  end
+
+  def exhibition_find
+  @exhibition = Exhibition.find(params[:id])
   end
 
 end
